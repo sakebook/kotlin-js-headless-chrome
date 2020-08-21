@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$USER_HOME$/workspace/oss/PathFinderMP" value="PREVIEW" />
+        <entry key="$USER_HOME$/workspace/oss/kotlin-native/samples" value="PREVIEW" />
+        <entry key="$USER_HOME$/workspace/oss/kotlinx.serialization/example-native" value="PREVIEW" />
+        <entry key="$USER_HOME$/workspace/web/alfred-city" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+</project>
