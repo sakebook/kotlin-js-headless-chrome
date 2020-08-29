@@ -4,8 +4,8 @@ class SlackConfig {
 
     init {
         DotEnv.config()
-        token = js("process.env.SLACK_TOKEN")?.unsafeCast<String>() ?: "dame token"
-        channel = js("process.env.SLACK_CHANNEL")?.unsafeCast<String>() ?: "dame channel"
+        token = js("process.env.SLACK_TOKEN")?.unsafeCast<String>() ?: throw IllegalArgumentException("token is not found.")
+        channel = js("process.env.SLACK_CHANNEL")?.unsafeCast<String>() ?: throw IllegalArgumentException("channel is not found.")
     }
 }
 

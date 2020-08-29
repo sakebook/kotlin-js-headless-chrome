@@ -135,37 +135,7 @@ external interface Route {
     fun abort(errorCode: String = definedExternally): Promise<Unit>
 //    fun `continue`(overrides: RouteContinueOverrides = definedExternally): Promise<Unit>
 //    fun fulfill(response: RouteFulfillResponse): Promise<Unit>
-    fun request(): Request
-}
-
-external interface Request {
-//    fun failure(): RequestFailure?
-//    fun frame(): Frame
-//    fun headers(): `T$0`
-    fun isNavigationRequest(): Boolean
-    fun method(): String
-    fun postData(): String?
-//    fun postDataBuffer(): Buffer?
-    fun postDataJSON(): Any?
-    fun redirectedFrom(): Request?
-    fun redirectedTo(): Request?
-    fun resourceType(): String
-    fun response(): Promise<Response?>
-    fun url(): String
-}
-
-external interface Response {
-//    fun body(): Promise<Buffer>
-    fun finished(): Promise<Error?>
-//    fun frame(): Frame
-//    fun headers(): `T$0`
-    fun json(): Promise<Any>
-    fun ok(): Boolean
-    fun request(): Request
-    fun status(): Number
-    fun statusText(): String
-    fun text(): Promise<String>
-    fun url(): String
+//    fun request(): Request
 }
 
 @JsModule("playwright")

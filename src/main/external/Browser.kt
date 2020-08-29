@@ -1,6 +1,5 @@
-import org.w3c.dom.url.URL
+
 import kotlin.js.Promise
-import kotlin.js.RegExp
 
 external interface Browser {
     fun on(event: String /* 'disconnected' */, listener: () -> Unit): Browser /* this */
@@ -41,21 +40,21 @@ external interface BrowserContext {
 //    fun grantPermissions(permissions: Array<String>, options: BrowserContextGrantPermissionsOptions = definedExternally): Promise<Unit>
     fun newPage(): Promise<Page>
     fun pages(): Array<Page>
-    fun route(url: String, handler: (arg0: Route, arg1: Request) -> Unit): Promise<Unit>
-    fun route(url: RegExp, handler: (arg0: Route, arg1: Request) -> Unit): Promise<Unit>
-    fun route(url: (arg0: URL) -> Boolean, handler: (arg0: Route, arg1: Request) -> Unit): Promise<Unit>
+//    fun route(url: String, handler: (arg0: Route, arg1: Request) -> Unit): Promise<Unit>
+//    fun route(url: RegExp, handler: (arg0: Route, arg1: Request) -> Unit): Promise<Unit>
+//    fun route(url: (arg0: URL) -> Boolean, handler: (arg0: Route, arg1: Request) -> Unit): Promise<Unit>
     fun setDefaultNavigationTimeout(timeout: Number)
     fun setDefaultTimeout(timeout: Number)
     //    fun setExtraHTTPHeaders(headers: `T$0`): Promise<Unit>
 //    fun setGeolocation(geolocation: BrowserContextSetGeolocationGeolocation?): Promise<Unit>
 //    fun setHTTPCredentials(httpCredentials: BrowserContextSetHTTPCredentialsHttpCredentials?): Promise<Unit>
     fun setOffline(offline: Boolean): Promise<Unit>
-    fun unroute(url: String, handler: (arg0: Route, arg1: Request) -> Unit = definedExternally): Promise<Unit>
-    fun unroute(url: RegExp, handler: (arg0: Route, arg1: Request) -> Unit = definedExternally): Promise<Unit>
-    fun unroute(
-        url: (arg0: URL) -> Boolean,
-        handler: (arg0: Route, arg1: Request) -> Unit = definedExternally
-    ): Promise<Unit>
+//    fun unroute(url: String, handler: (arg0: Route, arg1: Request) -> Unit = definedExternally): Promise<Unit>
+//    fun unroute(url: RegExp, handler: (arg0: Route, arg1: Request) -> Unit = definedExternally): Promise<Unit>
+//    fun unroute(
+//        url: (arg0: URL) -> Boolean,
+//        handler: (arg0: Route, arg1: Request) -> Unit = definedExternally
+//    ): Promise<Unit>
 //    fun waitForEvent(event: String /* 'close' */, optionsOrPredicate: `T$1` = definedExternally): Promise<Unit>
 //    fun waitForEvent(event: String /* 'page' */, optionsOrPredicate: `T$8` = definedExternally): Promise<Page>
 }

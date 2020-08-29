@@ -1,6 +1,5 @@
-import org.w3c.dom.url.URL
+
 import kotlin.js.Promise
-import kotlin.js.RegExp
 
 external interface Page {
     fun <R, Arg> evaluate(pageFunction: String, arg: Arg): Promise<R>
@@ -48,11 +47,11 @@ external interface Page {
 //    fun on(event: String /* 'frameattached' | 'framedetached' | 'framenavigated' */, listener: (frame: Frame) -> Unit): Page /* this */
     fun on(event: String /* 'pageerror' */, listener: (error: Error) -> Unit): Page /* this */
     fun on(event: String /* 'popup' */, listener: (page: Page) -> Unit): Page /* this */
-    fun on(
-        event: String /* 'request' | 'requestfailed' | 'requestfinished' */,
-        listener: (request: Request) -> Unit
-    ): Page /* this */
-    fun on(event: String /* 'response' */, listener: (response: Response) -> Unit): Page /* this */
+//    fun on(
+//        event: String /* 'request' | 'requestfailed' | 'requestfinished' */,
+//        listener: (request: Request) -> Unit
+//    ): Page /* this */
+//    fun on(event: String /* 'response' */, listener: (response: Response) -> Unit): Page /* this */
     fun on(event: String /* 'worker' */, listener: (worker: Worker) -> Unit): Page /* this */
     fun once(
         event: String /* 'close' | 'crash' | 'domcontentloaded' | 'load' */,
@@ -65,11 +64,11 @@ external interface Page {
 //    fun once(event: String /* 'frameattached' | 'framedetached' | 'framenavigated' */, listener: (frame: Frame) -> Unit): Page /* this */
     fun once(event: String /* 'pageerror' */, listener: (error: Error) -> Unit): Page /* this */
     fun once(event: String /* 'popup' */, listener: (page: Page) -> Unit): Page /* this */
-    fun once(
-        event: String /* 'request' | 'requestfailed' | 'requestfinished' */,
-        listener: (request: Request) -> Unit
-    ): Page /* this */
-    fun once(event: String /* 'response' */, listener: (response: Response) -> Unit): Page /* this */
+//    fun once(
+//        event: String /* 'request' | 'requestfailed' | 'requestfinished' */,
+//        listener: (request: Request) -> Unit
+//    ): Page /* this */
+//    fun once(event: String /* 'response' */, listener: (response: Response) -> Unit): Page /* this */
     fun once(event: String /* 'worker' */, listener: (worker: Worker) -> Unit): Page /* this */
     fun addListener(
         event: String /* 'close' | 'crash' | 'domcontentloaded' | 'load' */,
@@ -82,11 +81,11 @@ external interface Page {
 //    fun addListener(event: String /* 'frameattached' | 'framedetached' | 'framenavigated' */, listener: (frame: Frame) -> Unit): Page /* this */
     fun addListener(event: String /* 'pageerror' */, listener: (error: Error) -> Unit): Page /* this */
     fun addListener(event: String /* 'popup' */, listener: (page: Page) -> Unit): Page /* this */
-    fun addListener(
-        event: String /* 'request' | 'requestfailed' | 'requestfinished' */,
-        listener: (request: Request) -> Unit
-    ): Page /* this */
-    fun addListener(event: String /* 'response' */, listener: (response: Response) -> Unit): Page /* this */
+//    fun addListener(
+//        event: String /* 'request' | 'requestfailed' | 'requestfinished' */,
+//        listener: (request: Request) -> Unit
+//    ): Page /* this */
+//    fun addListener(event: String /* 'response' */, listener: (response: Response) -> Unit): Page /* this */
     fun addListener(event: String /* 'worker' */, listener: (worker: Worker) -> Unit): Page /* this */
     fun removeListener(
         event: String /* 'close' | 'crash' | 'domcontentloaded' | 'load' */,
@@ -99,11 +98,11 @@ external interface Page {
 //    fun removeListener(event: String /* 'frameattached' | 'framedetached' | 'framenavigated' */, listener: (frame: Frame) -> Unit): Page /* this */
     fun removeListener(event: String /* 'pageerror' */, listener: (error: Error) -> Unit): Page /* this */
     fun removeListener(event: String /* 'popup' */, listener: (page: Page) -> Unit): Page /* this */
-    fun removeListener(
-        event: String /* 'request' | 'requestfailed' | 'requestfinished' */,
-        listener: (request: Request) -> Unit
-    ): Page /* this */
-    fun removeListener(event: String /* 'response' */, listener: (response: Response) -> Unit): Page /* this */
+//    fun removeListener(
+//        event: String /* 'request' | 'requestfailed' | 'requestfinished' */,
+//        listener: (request: Request) -> Unit
+//    ): Page /* this */
+//    fun removeListener(event: String /* 'response' */, listener: (response: Response) -> Unit): Page /* this */
     fun removeListener(event: String /* 'worker' */, listener: (worker: Worker) -> Unit): Page /* this */
     fun off(
         event: String /* 'close' | 'crash' | 'domcontentloaded' | 'load' */,
@@ -116,11 +115,11 @@ external interface Page {
 //    fun off(event: String /* 'frameattached' | 'framedetached' | 'framenavigated' */, listener: (frame: Frame) -> Unit): Page /* this */
     fun off(event: String /* 'pageerror' */, listener: (error: Error) -> Unit): Page /* this */
     fun off(event: String /* 'popup' */, listener: (page: Page) -> Unit): Page /* this */
-    fun off(
-        event: String /* 'request' | 'requestfailed' | 'requestfinished' */,
-        listener: (request: Request) -> Unit
-    ): Page /* this */
-    fun off(event: String /* 'response' */, listener: (response: Response) -> Unit): Page /* this */
+//    fun off(
+//        event: String /* 'request' | 'requestfailed' | 'requestfinished' */,
+//        listener: (request: Request) -> Unit
+//    ): Page /* this */
+//    fun off(event: String /* 'response' */, listener: (response: Response) -> Unit): Page /* this */
     fun off(event: String /* 'worker' */, listener: (worker: Worker) -> Unit): Page /* this */
 //    var accessibility: Accessibility
 //    fun addInitScript(script: Function<*>, arg: Serializable = definedExternally): Promise<Unit>
@@ -148,7 +147,7 @@ external interface Page {
 //    fun getAttribute(selector: String, name: String, options: PageGetAttributeOptions = definedExternally): Promise<String?>
 //    fun goBack(options: PageGoBackOptions = definedExternally): Promise<Response?>
 //    fun goForward(options: PageGoForwardOptions = definedExternally): Promise<Response?>
-    fun goto(url: String, options: PageGotoOptions = definedExternally): Promise<Response?>
+    fun goto(url: String, options: PageGotoOptions = definedExternally): Promise<Any>
 //    fun hover(selector: String, options: PageHoverOptions = definedExternally): Promise<Unit>
 //    fun innerHTML(selector: String, options: PageInnerHTMLOptions = definedExternally): Promise<String>
 //    fun innerText(selector: String, options: PageInnerTextOptions = definedExternally): Promise<String>
@@ -160,9 +159,9 @@ external interface Page {
 //    fun pdf(options: PagePdfOptions = definedExternally): Promise<Any>
 //    fun press(selector: String, key: String, options: PagePressOptions = definedExternally): Promise<Unit>
 //    fun reload(options: PageReloadOptions = definedExternally): Promise<Response?>
-    fun route(url: String, handler: (arg0: Route, arg1: Request) -> Unit): Promise<Unit>
-    fun route(url: RegExp, handler: (arg0: Route, arg1: Request) -> Unit): Promise<Unit>
-    fun route(url: (arg0: URL) -> Boolean, handler: (arg0: Route, arg1: Request) -> Unit): Promise<Unit>
+//    fun route(url: String, handler: (arg0: Route, arg1: Request) -> Unit): Promise<Unit>
+//    fun route(url: RegExp, handler: (arg0: Route, arg1: Request) -> Unit): Promise<Unit>
+//    fun route(url: (arg0: URL) -> Boolean, handler: (arg0: Route, arg1: Request) -> Unit): Promise<Unit>
     fun screenshot(options: PageScreenshotOptions = definedExternally): Promise<Any>
 //    fun selectOption(selector: String, values: String?, options: PageSelectOptionOptions = definedExternally): Promise<Array<String>>
 //    fun selectOption(selector: String, values: ElementHandle__0?, options: PageSelectOptionOptions = definedExternally): Promise<Array<String>>
@@ -183,12 +182,12 @@ external interface Page {
     fun title(): Promise<String>
 //    fun type(selector: String, text: String, options: PageTypeOptions = definedExternally): Promise<Unit>
 //    fun uncheck(selector: String, options: PageUncheckOptions = definedExternally): Promise<Unit>
-    fun unroute(url: String, handler: (arg0: Route, arg1: Request) -> Unit = definedExternally): Promise<Unit>
-    fun unroute(url: RegExp, handler: (arg0: Route, arg1: Request) -> Unit = definedExternally): Promise<Unit>
-    fun unroute(
-        url: (arg0: URL) -> Boolean,
-        handler: (arg0: Route, arg1: Request) -> Unit = definedExternally
-    ): Promise<Unit>
+//    fun unroute(url: String, handler: (arg0: Route, arg1: Request) -> Unit = definedExternally): Promise<Unit>
+//    fun unroute(url: RegExp, handler: (arg0: Route, arg1: Request) -> Unit = definedExternally): Promise<Unit>
+//    fun unroute(
+//        url: (arg0: URL) -> Boolean,
+//        handler: (arg0: Route, arg1: Request) -> Unit = definedExternally
+//    ): Promise<Unit>
     fun url(): String
 //    fun viewportSize(): PageViewportSize?
 //    fun waitForEvent(event: String /* 'close' | 'crash' | 'domcontentloaded' | 'load' */, optionsOrPredicate: `T$1` = definedExternally): Promise<Unit>

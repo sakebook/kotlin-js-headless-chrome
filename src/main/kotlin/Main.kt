@@ -3,20 +3,27 @@ import kotlinx.coroutines.*
 import kotlinx.serialization.json.JsonObject
 import kotlin.js.JSON.stringify
 
-private val scope = CoroutineScope(Dispatchers.Default)
 private const val FILE_NAME = "capture.png"
 private const val URL = "https://slack.com/api/files.upload"
+private val scope = CoroutineScope(Dispatchers.Default)
 private val slackConfig = SlackConfig()
+private external val exports: dynamic
 
-fun main(args: Array<String>) {
-    val url = parseUrl(args) ?: throw IllegalArgumentException("URL is not found.")
+fun main() {
+    exports.capture = ::function
+}
+
+fun function(req: Request, res: Response) {
+    val url = parseUrl(req) ?: throw IllegalArgumentException("URL is not found.")
     scope.launch {
         capture(url)
         postToSlack(FILE_NAME)
+        res.status(200).send("success")
+        // TODO: error handling
     }
 }
 
-fun parseUrl(args: Array<String>): String? {
+fun parseUrl(req: Request): String? {
     // TODO:
     return "http://whatsmyuseragent.org/"
 }
