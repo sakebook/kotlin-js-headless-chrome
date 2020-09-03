@@ -1,11 +1,12 @@
 import fs.`T$50`
 import kotlinx.coroutines.*
-import kotlinx.serialization.json.JsonObject
 import kotlin.js.JSON.stringify
+
 
 private const val FILE_NAME = "capture.png"
 private const val URL = "https://slack.com/api/files.upload"
 private val scope = CoroutineScope(Dispatchers.Default)
+
 private val slackConfig = SlackConfig()
 private external val exports: dynamic
 
@@ -15,11 +16,15 @@ fun main() {
 
 fun function(req: Request, res: Response) {
     val url = parseUrl(req) ?: throw IllegalArgumentException("URL is not found.")
-    scope.launch {
+    scope.launch(CoroutineExceptionHandler { _, throwable ->
+        res.send(throwable.message ?: "").status(500)
+    }) {
         capture(url)
-        postToSlack(FILE_NAME)
-        res.status(200).send("success")
-        // TODO: error handling
+        val response = postToSlack(FILE_NAME)
+        when (response.data.ok) {
+            true -> res.send("success").status(200)
+            false -> res.send("error").status(400)
+        }
     }
 }
 
@@ -43,7 +48,7 @@ suspend fun capture(url: String) {
     browser.close().await()
 }
 
-suspend fun postToSlack(fileName: String) {
+suspend fun postToSlack(fileName: String): SlackResponse {
     val form = createFormData(fileName)
     val axios = Axios.create(object : AxiosRequestConfig {
         override var method: String? = "POST"
@@ -53,14 +58,14 @@ suspend fun postToSlack(fileName: String) {
             "content-type" to "multipart/form-data;boundary=" + form.getBoundary(),
         )
     })
-
-    val result = axios.post<JsonObject>(url = URL, data = form).await()
-    println(stringify(result, replacer = {key: String, value: Any? -> if (key == "_httpMessage" || key == "req" || key == "_currentRequest") null else value }))
+    val response = axios.post<SlackResponse>(url = URL, data = form).await()
+    console.log(stringify(response, replacer = {key: String, value: Any? -> if (key == "_httpMessage" || key == "req" || key == "_currentRequest") null else value }))
+    return response
 }
 
 private fun createFormData(fileName: String): FormData {
     val form = FormData()
-    val file = fs.createReadStream(path = fileName, options = object : `T$50`{})
+    val file = fs.createReadStream(path = fileName, options = object : `T$50` {})
     form.append("file", file)
     form.append("channels", slackConfig.channel)
     return form
