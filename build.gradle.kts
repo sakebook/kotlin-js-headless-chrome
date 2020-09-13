@@ -19,15 +19,29 @@ dependencies {
 //    implementation(npm("playwright", "1.3.0", generateExternals = true))
     implementation(npm("axios", "0.19.2", generateExternals = true))
     implementation(npm("form-data", "3.0.0"))
-    implementation(devNpm("dotenv", "8.2.0"))
+    implementation(npm("dotenv", "8.2.0"))
 }
 
 kotlin {
     sourceSets["main"].kotlin.srcDir("src/main/external")
     js {
-        nodejs {
-        }
+        nodejs()
         useCommonJs()
         binaries.executable()
+    }
+}
+
+tasks {
+    val packaging by creating(Copy::class) {
+        from("build/js/packages/${project.name}/kotlin/${project.name}.js", "build/js/packages/${project.name}/package.json")
+        into("functions")
+        rename { it.replace("${project.name}.js", "index.js") }
+
+        doLast {
+            val jsonFile = file("functions/package.json")
+            val texts = jsonFile.readLines()
+                .map { it.replace("kotlin/${project.name}.js", "index.js") }
+            jsonFile.writeText(texts.joinToString("\n"))
+        }
     }
 }

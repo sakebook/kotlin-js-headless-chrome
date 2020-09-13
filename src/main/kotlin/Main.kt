@@ -8,10 +8,14 @@ private const val URL = "https://slack.com/api/files.upload"
 private val scope = CoroutineScope(Dispatchers.Default)
 
 private val slackConfig = SlackConfig()
-private external val exports: dynamic
+
+@JsName("exports")
+private external object Exports {
+    var capture: dynamic
+}
 
 fun main() {
-    exports.capture = ::function
+    Exports.capture = ::function
 }
 
 fun function(req: Request, res: Response) {
