@@ -32,6 +32,10 @@ kotlin {
 }
 
 tasks {
+    getting(org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile::class) {
+        kotlinOptions.outputFile = "build/js/packages/${project.name}/index.js"
+    }
+
     val packaging by creating(Copy::class) {
         from("build/js/packages/${project.name}/kotlin/${project.name}.js", "build/js/packages/${project.name}/package.json")
         into("functions")
