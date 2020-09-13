@@ -32,17 +32,13 @@ kotlin {
 }
 
 tasks {
-    getting(org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile::class) {
-        kotlinOptions.outputFile = "build/js/packages/${project.name}/index.js"
-    }
-
     val packaging by creating(Copy::class) {
-        from("build/js/packages/${project.name}/kotlin/${project.name}.js", "build/js/packages/${project.name}/package.json")
-        into("functions")
+        from("build/js/packages/${project.name}/kotlin/")
+        into("build/js/packages/${project.name}/kotlin/")
         rename { it.replace("${project.name}.js", "index.js") }
 
         doLast {
-            val jsonFile = file("functions/package.json")
+            val jsonFile = file("build/js/packages/${project.name}/package.json")
             val texts = jsonFile.readLines()
                 .map { it.replace("kotlin/${project.name}.js", "index.js") }
             jsonFile.writeText(texts.joinToString("\n"))
