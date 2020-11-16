@@ -1,0 +1,20 @@
+steps:
+  - name: gradle:6.3-jdk8
+    entrypoint: gradle
+    args: ['cKJ', 'packaging']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    dir: 'build/functions/'
+    timeout: 600s
+    args:
+      - functions
+      - deploy
+      - capture
+      - --source=.
+      - --region=asia-northeast1
+      - --trigger-http
+      - --runtime=nodejs12
+      - --allow-unauthenticated
+      - --verbosity=debug
+      - --memory
+      - 512MB
+      - --timeout=540s

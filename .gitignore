@@ -117,3 +117,4 @@ fabric.properties
 
 .env
 capture.png
+node_modules/
