@@ -5,11 +5,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SlackResponse(
     @SerialName("data")
-    val `data`: Data
+    val `data`: SlackData
 )
 
 @Serializable
-data class Data(
+data class SlackData(
     @SerialName("error")
     val error: String,
     @SerialName("ok")

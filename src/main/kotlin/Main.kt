@@ -2,13 +2,39 @@ import fs.`T$50`
 import kotlinx.coroutines.*
 import kotlin.js.JSON.stringify
 import kotlin.js.Promise
+import kotlin.properties.Delegates
 
 
 private const val FILE_NAME = "capture.png"
 private const val URL = "https://slack.com/api/files.upload"
 private val scope = CoroutineScope(Dispatchers.Default)
 
-private val slackConfig = SlackConfig()
+var slackConfig: SlackConfig by Delegates.notNull<SlackConfig>()
+
+private fun createSlackConfig() {
+    kotlin.js.console.log("createSlackConfig")
+    val projectId = js("process.env.PROJECT_ID")?.unsafeCast<String>() ?: throw IllegalArgumentException("project id is not found.")
+    val slackChannelKey = js("process.env.SLACK_CHANNEL_KEY")?.unsafeCast<String>() ?: throw IllegalArgumentException("channel key is not found.")
+    val slackTokenKey = js("process.env.SLACK_TOKEN_KEY")?.unsafeCast<String>() ?: throw IllegalArgumentException("token key is not found.")
+    val client = SecretManager.SecretManagerServiceClient()
+    val secretChannel = client.accessSecretVersion(
+        kotlin.js.json(
+            "name" to "projects/${projectId}/secrets/${slackChannelKey}/versions/latest"
+        )
+    )
+    val secretToken = client.accessSecretVersion(
+        kotlin.js.json(
+            "name" to "projects/${projectId}/secrets/${slackTokenKey}/versions/latest"
+        )
+    )
+    val awaits = arrayOf(secretToken, secretChannel)
+    Promise.all(awaits)
+        .then { res ->
+            kotlin.js.console.log("SlackConfig created maybe success")
+            slackConfig = SlackConfig(token = res[0].value(), channel = res[1].value())
+//            kotlin.js.console.log("slackConfig: ${JSON.stringify(slackConfig)}")
+        }.catch { throw it }
+}
 
 @JsName("exports")
 private external object Exports {
@@ -16,8 +42,9 @@ private external object Exports {
     var afterTimeout: dynamic
 }
 
-
 fun main() {
+    createSlackConfig()
+    // for local
 //    capture(object{} as Request,  object{} as Response)
     Exports.capture = ::capture
     Exports.afterTimeout = ::timeout
