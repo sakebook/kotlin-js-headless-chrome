@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.kotlin.js") version "1.4.20"
+    id("org.jetbrains.kotlin.js") version "1.4.21"
 }
 
 group = "com.github.sakebook"
@@ -25,11 +25,7 @@ dependencies {
 kotlin {
     sourceSets["main"].kotlin.srcDir("src/main/external")
     js {
-        nodejs {
-            runTask {
-                nodeJs.versions.dukat.version = "0.5.8-rc.2"
-            }
-        }
+        nodejs()
         useCommonJs()
         binaries.executable()
     }
