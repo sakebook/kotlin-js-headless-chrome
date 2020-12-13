@@ -19,7 +19,6 @@ dependencies {
     implementation(npm("axios", "0.21.0", generateExternals = true))
     implementation(npm("puppeteer", "5.5.0"))
     implementation(npm("form-data", "3.0.0"))
-    implementation(npm("dotenv", "8.2.0"))
     implementation(npm("@google-cloud/secret-manager", "3.2.2"))
 }
 
@@ -40,7 +39,7 @@ tasks {
     val packaging by creating(Copy::class) {
         val directory = "functions"
         from("build/js/packages/${project.name}/kotlin/${project.name}.js", "build/js/", "build/js/packages/${project.name}/package.json")
-        exclude("**/packages/", "node_modules/", "node_modules.state")
+        exclude("**/packages/", "node_modules/", "node_modules.state", "yarn.lock")
         into("$directory/")
         rename { it.replace("${project.name}.js", "index.js") }
 
