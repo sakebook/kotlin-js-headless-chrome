@@ -27,7 +27,6 @@ kotlin {
     js {
         nodejs()
         useCommonJs()
-        binaries.executable()
     }
 }
 

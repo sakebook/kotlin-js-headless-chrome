@@ -4,7 +4,6 @@ steps:
     args: ['cKJ', 'packaging']
   - name: 'gcr.io/cloud-builders/gcloud'
     dir: 'functions/'
-    timeout: 600s
     args:
       - functions
       - deploy
@@ -14,11 +13,8 @@ steps:
       - --trigger-http
       - --runtime=nodejs12
       - --allow-unauthenticated
-      - --verbosity=debug
       - --memory
       - 512MB
-      - --timeout=540s
-      - --ignore-file=../.gcloudignore
       - --service-account=secret-manager@able-source-341.iam.gserviceaccount.com
       - --update-env-vars
       - PROJECT_ID=able-source-341,SLACK_CHANNEL_KEY=capture_slack_channel,SLACK_TOKEN_KEY=capture_slack_token
