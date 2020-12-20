@@ -4,7 +4,7 @@ URL capture and post to Slack using Headless Browser in Kotlin/JS and running wi
 
 画像はる
 
-![image](https://raw.githubusercontent.com/sakebook/kotlin-js-headless-chrome/master/art/capture.png)
+![image](https://raw.githubusercontent.com/sakebook/kotlin-js-headless-chrome/main/art/capture.png)
 
 ## Environment
 - Kotlin v1.4.21
@@ -22,7 +22,7 @@ $ ./gradlew clean compileKotlinJs
 
 Running local server.
 
-You need replace [`SlackConfig`](https://github.com/sakebook/kotlin-js-headless-chrome/blob/master/src/main/kotlin/main.kt#L12).
+You need replace [`SlackConfig`](https://github.com/sakebook/kotlin-js-headless-chrome/blob/main/src/main/kotlin/main.kt#L12).
 
 ```sh
 $ ./gradlew clean cKJ packaging && cd functions && npm install && npx @google-cloud/functions-framework --target=capture ; cd -
@@ -40,5 +40,5 @@ $ gcloud builds submit . --config cloudbuild.yaml
 
 ---
 
-## [LICENSE](https://github.com/sakebook/kotlin-js-headless-chrome/blob/master/LICENSE)
-Copyright (c) 2020 sakebook Licensed under the [Apache License](https://github.com/sakebook/kotlin-js-headless-chrome/blob/master/LICENSE).
+## [LICENSE](https://github.com/sakebook/kotlin-js-headless-chrome/blob/main/LICENSE)
+Copyright (c) 2020 sakebook Licensed under the [Apache License](https://github.com/sakebook/kotlin-js-headless-chrome/blob/main/LICENSE).
