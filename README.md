@@ -2,8 +2,6 @@
 
 URL capture and post to Slack using Headless Browser in Kotlin/JS and running with Cloud Functions for Firebase.
 
-画像はる
-
 ![image](https://raw.githubusercontent.com/sakebook/kotlin-js-headless-chrome/main/art/capture.png)
 
 ## Environment
@@ -22,7 +20,7 @@ $ ./gradlew clean compileKotlinJs
 
 Running local server.
 
-You need replace [`SlackConfig`](https://github.com/sakebook/kotlin-js-headless-chrome/blob/main/src/main/kotlin/main.kt#L12).
+You need replace [`SlackConfig`](https://github.com/sakebook/kotlin-js-headless-chrome/blob/main/src/main/kotlin/Main.kt#L12).
 
 ```sh
 $ ./gradlew clean cKJ packaging && cd functions && npm install && npx @google-cloud/functions-framework --target=capture ; cd -
